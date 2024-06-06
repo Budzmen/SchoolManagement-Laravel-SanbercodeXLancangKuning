@@ -18,11 +18,11 @@ class CreateProfileTable extends Migration
             $table->integer('umur'); // Umur sebagai integer
             $table->string('bio', 45); // Bio dengan panjang maksimum 45 karakter
             $table->string('alamat', 45); // Alamat dengan panjang maksimum 45 karakter
-            $table->unsignedBigInteger('user_id'); // Foreign key untuk users
+            $table->unsignedBigInteger('users_id'); // Foreign key untuk users
             $table->timestamps(); // Kolom created_at dan updated_at
 
             // Definisi foreign key
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
