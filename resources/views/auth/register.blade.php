@@ -26,10 +26,24 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="umur" class="col-md-4 col-form-label text-md-end">{{ __('umur') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="umur" type="text" class="form-control @error('umur') is-invalid @enderror" name="umur" value="{{ old('umur') }}">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="umur" class="col-md-4 col-form-label text-md-end">Umur</label>
+
+                            <div class="col-md-6">
+                                <input id="umur" type="text" class="form-control @error('umur') is-invalid @enderror" name="umur">
 
                                 @error('umur')
                                     <span class="invalid-feedback" role="alert">
@@ -40,10 +54,38 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="bio" class="col-md-4 col-form-label text-md-end">Biodata</label>
+
+                            <div class="col-md-6">
+                                <textarea id="bio" type="text" class="form-control @error('bio') is-invalid @enderror" name="bio"></textarea>
+
+                                @error('bio')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="alamat" class="col-md-4 col-form-label text-md-end">Alamat</label>
+
+                            <div class="col-md-6">
+                                <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat">
+
+                                @error('alamat')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -57,7 +99,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
 
@@ -75,3 +117,4 @@
     </div>
 </div>
 @endsection
+

@@ -22,6 +22,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('students', StudentController::class);
-Route::resource('teachers', TeacherController::class);
-Route::resource('subject', SubjectController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('students', StudentController::class);
+    Route::resource('teachers', TeacherController::class);
+    Route::resource('subject', SubjectController::class);
+});
+
