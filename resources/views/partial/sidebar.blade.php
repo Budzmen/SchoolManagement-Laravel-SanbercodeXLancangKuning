@@ -6,7 +6,7 @@
         </div>
         <div class="info">
             @auth
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="#" class="d-block">{{ Auth::user()->name }}({{ Auth::user()->profile->umur}}tahun)</a>
             @else
                 <a href="#" class="d-block">User belum login</a>
             @endauth
@@ -45,7 +45,6 @@
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
-                @endauth
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="/students" class="nav-link">
@@ -67,7 +66,14 @@
                     </li>
                 </ul>
             </li>
-            @auth
+
+            <li class="nav-item">
+                <a href="/profile" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Profile</p>
+                </a>
+            </li>
+
             <li class="nav-item bg-danger">
                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="nav-icon fas fa-sign-out-alt"></i>

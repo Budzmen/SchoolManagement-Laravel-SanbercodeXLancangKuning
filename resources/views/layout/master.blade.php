@@ -43,7 +43,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>@yield('judul')</h1>
+            <h1>@yield('title')</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -55,7 +55,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">@yield('judul2')</h3>
+          <h3 class="card-title">@yield('title')</h3>
 
           <div class="card-tools">
           </div>
