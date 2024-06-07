@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Teacher;
 
 class TeacherController extends Controller
 {
@@ -11,7 +12,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::all();
+
+        return view('teacher.tampil', ['teachers' => $teachers]);
     }
 
     /**
@@ -19,7 +22,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('teacher.tambah');
     }
 
     /**
@@ -27,7 +30,21 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            'phone' => 'required|max:13',
+            'email' => 'required|max:50',
+        ]);
+
+        $teacher = new Teacher;
+ 
+        $teacher->name = $request->input('name');
+        $teacher->phone = $request->input('phone');
+        $teacher->email = $request->input('email');
+ 
+        $teacher->save();
+
+        return redirect('/teachers');
     }
 
     /**
@@ -35,7 +52,9 @@ class TeacherController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $teacher = Teacher::find($id);
+
+        return view('teacher.detail', ['teacher' => $teacher]);
     }
 
     /**
@@ -43,7 +62,9 @@ class TeacherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $teacher = Teacher::find($id);
+
+        return view('teacher.edit', ['teacher' => $teacher]);
     }
 
     /**
@@ -51,7 +72,20 @@ class TeacherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            'phone' => 'required|max:13',
+            'email' => 'required|max:50',
+        ]);
+
+        Teacher::where('id', $id)
+            ->update([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'email' => $request->input('email'),
+            ]);
+
+        return redirect('/teachers');
     }
 
     /**
@@ -59,6 +93,8 @@ class TeacherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Teacher::where('id', $id)->delete();
+
+        return redirect('/teachers');
     }
 }
