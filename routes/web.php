@@ -24,11 +24,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/profile',[ProfileController::class,'index']);
+    Route::get('/profile', [ProfileController::class, 'index']);
     Route::put('/profile/{id}', [ProfileController::class, 'update']);
     Route::resource('students', StudentController::class);
     Route::resource('teachers', TeacherController::class);
-    Route::resource('subject', SubjectController::class);
-    Route::resource('subject', SubjectController::class);
+    Route::resource('subjects', SubjectController::class);
 });
-

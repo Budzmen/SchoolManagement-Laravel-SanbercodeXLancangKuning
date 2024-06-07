@@ -21,7 +21,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.add-subjects');
     }
 
     /**
@@ -45,7 +45,7 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('page.edit-subjects');
     }
 
     /**

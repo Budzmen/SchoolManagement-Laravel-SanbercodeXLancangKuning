@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/subject" class="nav-link">
+                        <a href="/subjects" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Subjects</p>
                         </a>
