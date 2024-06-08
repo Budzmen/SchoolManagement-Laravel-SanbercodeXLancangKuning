@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Subject;
+use App\Models\Teacher;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -12,7 +15,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::all();
+        $subjects = Subject::with(['teacher', 'student'])->get();
         return view('page.subjects', ['subjects' => $subjects]);
     }
 
@@ -21,7 +24,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('page.add-subjects');
+        $teachers = Teacher::all();
+        $students = Student::all();
+        return view('page.add-subjects', ['teachers' => $teachers, 'students' => $students]);
     }
 
     /**
@@ -29,7 +34,29 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|min:5',
+                'teacher_id' => 'required',
+                'student_id' => 'required'
+            ],
+            [
+                'name.required' => 'A name is required',
+                'teacher_id.required' => 'A age is required',
+                'student_id.required' => 'A bio is required',
+                'name.min' => 'A name is validate with min 5 character',
+            ]
+        );
+
+        $subject = new Subject();
+
+        $subject->name = $request->name;
+        $subject->teacher_id = $request->teacher_id;
+        $subject->student_id = $request->student_id;
+
+        $subject->save();
+
+        return redirect('/subjects')->with('success', 'Data berhasil ditambah!');
     }
 
     /**
@@ -45,7 +72,10 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
-        return view('page.edit-subjects');
+        $subjects = Subject::with(['teacher', 'student'])->find($id);
+        $teachers = Teacher::all();
+        $students = Student::all();
+        return view('page.edit-subjects', ['subjects' => $subjects, 'teachers' => $teachers, 'students' => $students]);
     }
 
     /**
@@ -53,7 +83,28 @@ class SubjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|min:5',
+                'teacher_id' => 'required',
+                'student_id' => 'required'
+            ],
+            [
+                'name.required' => 'A name is required',
+                'teacher_id.required' => 'A age is required',
+                'student_id.required' => 'A bio is required',
+                'name.min' => 'A name is validate with min 5 character',
+            ]
+        );
+
+        Subject::where('id', $id)
+            ->update([
+                'name' => $request->name,
+                'teacher_id' => $request->teacher_id,
+                'student_id' => $request->student_id
+            ]);
+
+        return redirect('/subjects')->with('success', 'Data berhasil diperbaharui!');
     }
 
     /**
@@ -61,6 +112,9 @@ class SubjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Subject::where('id', $id)
+            ->delete();
+
+        return redirect('/subjects')->with('success', 'Data berhasil dihapus!');
     }
 }
