@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -11,7 +12,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+
+        return view('student.tampil', ['students' => $students]);
     }
 
     /**
@@ -19,7 +22,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view("student.tambah");
     }
 
     /**
@@ -27,7 +30,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|max:50',
+            'grade' => 'required|integer'
+        ]);
+
+        $student = new Student();
+ 
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->grade = $request->input('grade');
+ 
+        $student->save();
+
+        return redirect('/students');
     }
 
     /**
@@ -35,15 +52,19 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+            $student = Student::find($id);
+    
+            return view('student.detail', ['student' => $student]);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $student = Student::find($id);
+
+        return view('student.edit', ['student' => $student]) ->with('success', 'Student deleted successfully.');;
     }
 
     /**
@@ -51,7 +72,20 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|max:50',
+            'grade' => 'required|integer',
+        ]);
+
+        Student::where('id', $id)
+            ->update([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'grade' => $request->input('grade'),
+            ]);
+
+        return redirect('/students');
     }
 
     /**
@@ -59,6 +93,8 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Student::where('id', $id)->delete();
+
+        return redirect('/students');
     }
 }
