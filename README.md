@@ -15,7 +15,7 @@ Web Manajemen Sekolah
 
 ## ERD
 
-![Alt text](ERD.jng)
+![Alt text](ERD.jpg)
 
 ## Link Video
 
