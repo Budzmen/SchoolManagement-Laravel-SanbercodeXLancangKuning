@@ -11,7 +11,7 @@
 
 ## Tema Project
 
-Web Manajemen Sekolah
+Web Manajemen Private Teacher
 
 ## ERD
 
@@ -19,4 +19,4 @@ Web Manajemen Sekolah
 
 ## Link Video
 
-Link Demo Aplikasi :
+Link Demo Aplikasi : https://www.youtube.com/watch?v=Hn9_cO_NqOQ

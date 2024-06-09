@@ -28,7 +28,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
       <img class="brand-image" src="{{asset('/template/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">School Management</span>
+      <span class="brand-text font-weight-light">Private Teacher</span>
     </a>
 
     <!-- Sidebar -->
