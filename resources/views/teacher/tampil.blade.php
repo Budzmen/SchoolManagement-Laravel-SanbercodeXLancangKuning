@@ -1,11 +1,7 @@
 @extends('layout.master')
 
-@section('judul')
-test
-@endsection
-
-@section('judul2')
-test
+@section('title')
+List Teachers
 @endsection
 
 @section('content')
